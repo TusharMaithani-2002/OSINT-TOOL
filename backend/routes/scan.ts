@@ -3,6 +3,8 @@ import {
   getDnsInfo,
   getHttpInfo,
   getServerLocation,
+  getServerStatus,
+  getSocialTags,
   getSslInfo,
   getWhois
 } from '../services'
@@ -20,11 +22,13 @@ scanRoute.post('/', async (c) => {
 
   const target = url.startsWith('http') ? url : `https://${url}`
 
-  const [dns, http, ssl, whois] = await Promise.all([
+  const [dns, http, ssl, whois, socialTags, serverStatus] = await Promise.all([
     getDnsInfo(target),
     getHttpInfo(target),
     getSslInfo(target),
-    getWhois(target)
+    getWhois(target),
+    getSocialTags(target),
+    getServerStatus(target)
   ])
 
   const ip = dns.A?.[0]
@@ -38,13 +42,18 @@ scanRoute.post('/', async (c) => {
     http,
     ssl,
     whois,
-    serverLocation
+    serverLocation,
+    socialTags,
+    serverStatus
   })
 
   return c.json({
     url: target,
     dns,
     http,
-    ssl
+    ssl,
+    serverLocation,
+    socialTags,
+    serverStatus
   })
 })
