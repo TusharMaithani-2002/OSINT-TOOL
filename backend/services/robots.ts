@@ -33,9 +33,7 @@ export async function getRobotTxtInfo(url: string) {
     const res = await fetch(url + '/robots.txt')
     const data = await res.text()
 
-    return {
-      robots: parseTextData(data)
-    }
+    return parseTextData(data)
   } catch (error: any) {
     console.error(error.message)
     return {}

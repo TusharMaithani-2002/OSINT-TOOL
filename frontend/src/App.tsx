@@ -4,7 +4,7 @@ import './App.css'
 function App() {
   const [data, setData] = useState('')
   const fetchResponse = async () => {
-    const response = await fetch('/api/')
+    const response = await fetch('/scan/')
     if (response.ok) {
       console.log(response)
       const data = await response.text()
@@ -12,7 +12,7 @@ function App() {
     }
   }
   return (
-    <div>
+    <div className='bg-red-400'>
       This is my app : {data} <button onClick={fetchResponse}>Fetch</button>
     </div>
   )

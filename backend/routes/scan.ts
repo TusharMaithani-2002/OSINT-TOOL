@@ -8,6 +8,7 @@ import {
   getSslInfo,
   getWhois
 } from '../services'
+import { getRobotTxtInfo } from '../services/robots'
 
 export const scanRoute = new Hono()
 
@@ -22,13 +23,14 @@ scanRoute.post('/', async (c) => {
 
   const target = url.startsWith('http') ? url : `https://${url}`
 
-  const [dns, http, ssl, whois, socialTags, serverStatus] = await Promise.all([
+  const [dns, http, ssl, whois, socialTags, serverStatus, robots] = await Promise.all([
     getDnsInfo(target),
     getHttpInfo(target),
     getSslInfo(target),
     getWhois(target),
     getSocialTags(target),
-    getServerStatus(target)
+    getServerStatus(target),
+    getRobotTxtInfo(target)
   ])
 
   const ip = dns.A?.[0]
@@ -44,7 +46,8 @@ scanRoute.post('/', async (c) => {
     whois,
     serverLocation,
     socialTags,
-    serverStatus
+    serverStatus,
+    robots
   })
 
   return c.json({
@@ -54,6 +57,7 @@ scanRoute.post('/', async (c) => {
     ssl,
     serverLocation,
     socialTags,
-    serverStatus
+    serverStatus,
+    robots
   })
 })
