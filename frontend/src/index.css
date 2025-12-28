@@ -7,3 +7,36 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+/*
+  For light mode define colors below and then add dark colors in .dark
+*/
+:root {
+  --first: #FDFFC2;
+  --second: #FFFF80;
+  --third: #FFDB5C;
+  --fourth: #FFC700;
+}
+
+
+@keyframes border-spin {
+  to {
+    --angle: 1turn;
+  }
+}
+
+/*
+ border-image doesnot support border-radius
+*/
+.animate-button-border {
+  --border-width: 2px;
+  border: var(--border-width) solid;
+  border-image: conic-gradient(from var(--angle), var(--first) 25%, var(--second) 50%, var(--third) 75%, var(--fourth) 100%) 1;
+  animation: border-spin 4s cubic-bezier(0.22, 0.61, 0.36, 1) infinite;
+}
+
+@property --angle {
+  syntax: "<angle>";
+  inherits: true;
+  initial-value: 0turn;
+}

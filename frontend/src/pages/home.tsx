@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from '@tanstack/react-router'
 import { CustomInput } from '../components/ui'
-
 function HomePage() {
   const [url, setUrl] = useState<string>('')
   const navigate = useNavigate()
@@ -10,16 +9,23 @@ function HomePage() {
     navigate({ to: '/scan', search: { url } })
   }
   return (
-    <main className="flex justify-center items-center h-full w-full">
-      <div className='flex flex-col justify-between h-1/2 bg-red-400'>
-        <p>Enter the url you wish to check</p>
+    <main className="flex justify-center items-center h-full w-full bg-bgDark">
+      <div className="flex flex-col gap-4 justify-between w-full lg:w-1/3 p-2 text-textDark">
+        <p className="w-full text-textDark text-lg">Enter the url you wish to check</p>
 
-        <form action={handleSubmit} className="">
-          <CustomInput value={url} onChange={setUrl} />
+        <form action={handleSubmit} className="w-full flex flex-col gap-4">
+          <CustomInput
+            value={url}
+            onChange={setUrl}
+            className="w-full outline-none px-4 py-2 text-textLight"
+          />
+          <button
+            type="submit"
+            className="w-full p-3 bg-primary text-textDark border animate-button-border"
+          >
+            Analyse URL
+          </button>
         </form>
-        <div className="bg-bg text-text dark:bg-bgDark dark:text-textDark">
-          Scan results
-        </div>
       </div>
     </main>
   )

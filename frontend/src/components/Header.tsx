@@ -1,12 +1,11 @@
 import { Link } from '@tanstack/react-router'
-import { ThemeToggle } from './ThemeToggle'
 
 export function Header() {
   return (
-    <header className='flex items-center justify-between'>
-      <Link to='/' className='text-xl'>OSINT</Link>
+    <header className='flex items-center justify-between bg-bgDark p-2'>
+      <Link to='/' className='text-xl text-primary font-semibold'>OSINT</Link>
       <div>
-        <ThemeToggle />
+        {/* <ThemeToggle /> */}
       </div>
     </header>
   )

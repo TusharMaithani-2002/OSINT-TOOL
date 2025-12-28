@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { Outlet, createRootRoute } from '@tanstack/react-router'
 import { TanStackRouterDevtools } from '@tanstack/router-devtools'
 import { Header } from '../components/Header'
@@ -9,10 +8,10 @@ export const Route = createRootRoute({
 
 function RootComponent() {
   return (
-    <React.Fragment>
+    <div className='h-screen'>
       <Header />
       <Outlet />
       <TanStackRouterDevtools position="bottom-right" />
-    </React.Fragment>
+    </div>
   )
 }

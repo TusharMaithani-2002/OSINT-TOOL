@@ -5,10 +5,15 @@ export default {
   theme: {
     extend: {
       colors: {
-        bg: '#4C763B',
-        bgDark: '#89986D',
-        text: '#043915',
-        textDark: '#F6F0D7'
+        light: '#ECDFCC',
+        secondary: '#E49BA6',
+        primary: '#007F73',
+        dark: '#540863',
+        extraDark: '#000',
+        bgDark: '#222831',
+        bgLight: '#ECDFCC',
+        textLight: '#181C14',
+        textDark: '#ECDFCC'
       }
     }
   },
