@@ -12,10 +12,9 @@ import { getRobotTxtInfo } from '../services/robots'
 
 export const scanRoute = new Hono()
 
-scanRoute.post('/', async (c) => {
-  const body = (await c.req.json()) as { url: string }
-
-  const url = body.url
+scanRoute.get('/', async (c) => {
+  // const body = (await c.req.json()) as { url: string }
+  const url = c.req.query('url')
 
   if (!url) {
     return c.json({ error: 'URL missing' }, 400)
@@ -23,15 +22,16 @@ scanRoute.post('/', async (c) => {
 
   const target = url.startsWith('http') ? url : `https://${url}`
 
-  const [dns, http, ssl, whois, socialTags, serverStatus, robots] = await Promise.all([
-    getDnsInfo(target),
-    getHttpInfo(target),
-    getSslInfo(target),
-    getWhois(target),
-    getSocialTags(target),
-    getServerStatus(target),
-    getRobotTxtInfo(target)
-  ])
+  const [dns, http, ssl, whois, socialTags, serverStatus, robots] =
+    await Promise.all([
+      getDnsInfo(target),
+      getHttpInfo(target),
+      getSslInfo(target),
+      getWhois(target),
+      getSocialTags(target),
+      getServerStatus(target),
+      getRobotTxtInfo(target)
+    ])
 
   const ip = dns.A?.[0]
 
